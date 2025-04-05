@@ -321,7 +321,7 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
             }
         }
     }
-}
+
    ```
 
 5. **Save the Jenkins Project**:
