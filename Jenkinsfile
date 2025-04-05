@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/kartikcoder18/django-ci-cd'
+                git branch: 'main', url: 'https://github.com/kartikcoder18/django-ci-cd'
             }
         }
 
