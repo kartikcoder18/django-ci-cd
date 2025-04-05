@@ -28,8 +28,8 @@ Before starting, make sure you have the following installed and configured:
 
 ```groovy
 git clone https://github.com/kartikcoder18/django-ci-cd.git
-```
 cd django-ci-cd
+```
 ---
 
 ### Step 2: Create Django Project Locally
