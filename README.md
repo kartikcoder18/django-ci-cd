@@ -61,43 +61,42 @@ To containerize the Django application, we will use Docker. Follow these steps t
 1. Create a Dockerfile : In your repository's root folder, create a file named Dockerfile with the following content:
 
 ```groovy
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Dockerfile
+FROM python:3.10-slim
 
-# Set the working directory in the container
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Set working directory
 WORKDIR /app
 
 # Install dependencies
 COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy the current directory contents into the container
+# Copy the project
 COPY . /app/
 
-# Expose the port the app runs on
-EXPOSE 8000
+# Set static folder
+RUN mkdir -p /app/static
 
-# Define environment variable
-ENV NAME World
+# Collect static files
+RUN python manage.py collectstatic --noinput
 
-# Run Django server on container start
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Run migrations and start server
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
 ```
-2. Create a docker-compose.yml File
+2. Create a .dockerignore file
 In the root directory of your repository, create a docker-compose.yml file to simplify Docker container management. Add the following content:
 
 ```groovy
-version: '3'
-
-services:
-  web:
-    build: .
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-    environment:
-      - DEBUG=1
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+db.sqlite3
+/static/
 ```
 
 This configuration:
