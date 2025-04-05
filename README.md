@@ -132,7 +132,7 @@ You should see your Django application running inside the Docker container.
 
 ---
 ### Step 5: Implementation of EC2 and Install the dependecies
-1. Create an AWS EC2 Instance
+**1. Create an AWS EC2 Instance**
 
 To host the Jenkins server, we first need to create an EC2 instance on AWS.
 
