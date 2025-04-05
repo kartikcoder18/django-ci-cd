@@ -26,7 +26,9 @@ Before starting, make sure you have the following installed and configured:
 1. Go to GitHub, log in, and create a new repository named `django-ci-cd`.
 2. Clone the repository to your local machine:
 
+```groovy
 git clone https://github.com/kartikcoder18/django-ci-cd.git
+```
 cd django-ci-cd
 ---
 
@@ -54,7 +56,7 @@ pip freeze > requirements.txt
 
 Django>=4.2
 gunicorn
-
+---
 ### Step 4: Dockerize the Django Application
 To containerize the Django application, we will use Docker. Follow these steps to create the necessary configuration files and test the container locally.
 
@@ -126,7 +128,7 @@ http://localhost:8000
 ```
 You should see your Django application running inside the Docker container.
 
-
+---
 ### Step 5: Implementation of EC2 
 1. Create an AWS EC2 Instance
 
