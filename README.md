@@ -43,16 +43,12 @@ Before starting, make sure you have the following installed and configured:
 
 1. Go to [GitHub](https://github.com/), log in, and create a new repository named `django-ci-cd`.
 2. Clone the repository to your local machine:
-
-
 git clone https://github.com/kartikcoder18/django-ci-cd.git
 cd django-ci-cd
-Step 2: Create Django Project Locally
+
+## Step 2: Create Django Project Locally
 Clone your GitHub repository and set up the Django project:
 
-bash
-Copy
-Edit
 # Clone the repository
 git clone https://github.com/kartikcoder18/django-ci-cd.git
 cd django-ci-cd
@@ -62,30 +58,24 @@ django-admin startproject mynotes .
 
 # Create a new Django app named "notes"
 python manage.py startapp notes
-This will create the basic Django structure inside your repository.
 
-Step 3: Create requirements.txt
+## Step 3: Create requirements.txt
 After setting up Django and the notes app, you need to create a requirements.txt file to list the necessary dependencies.
 
-bash
-Copy
-Edit
-pip freeze > requirements.txt
-This file should include at least the following dependencies:
-
-txt
-Copy
-Edit
+1)pip freeze > requirements.txt
+2)This file should include at least the following dependencies:
 Django>=4.2
 gunicorn
-Step 4: Test Locally with Docker
+
+## Step 4: Test Locally with Docker
 To test everything locally before integrating Jenkins, you can use Docker to build and run the project.
 
 Create a Dockerfile for building the Docker container:
 
-dockerfile
-Copy
-Edit
+
+**`Dockerfile`:**
+```markdown
+```dockerfile
 # Use the official Python image
 FROM python:3.9
 
@@ -106,21 +96,21 @@ EXPOSE 8000
 
 # Run the Django development server
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "mynotes.wsgi:application"]
+
 Build and Run the Docker Container:
 
-bash
-Copy
-Edit
 docker build -t django-notes .
 docker run -p 8000:8000 django-notes
 After this, you can visit your project on:
 
 http://localhost:8000
 
-Step 5: Add Jenkinsfile and Dockerfile to GitHub
+##Step 5: Add Jenkinsfile and Dockerfile to GitHub
 Create a Jenkinsfile for the CI/CD pipeline:
 
+### Jenkinsfile for CI/CD Pipeline
 
+```groovy
 pipeline {
     agent any
 
@@ -130,7 +120,7 @@ pipeline {
                 git 'https://github.com/kartikcoder18/django-ci-cd.git'
             }
         }
-        
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -156,7 +146,6 @@ pipeline {
         }
     }
 }
-Push the changes to GitHub:
 
 
 git add .
@@ -165,22 +154,42 @@ git push -u origin main  # or 'master' depending on your default branch
 Step 6: Open Jenkins and Configure Pipeline
 Install Jenkins on EC2 Instance (if you haven’t already):
 
-bash
-Copy
-Edit
+
+### Step 6: Open Jenkins and Configure Pipeline
+
+If you haven't already installed Jenkins, follow these steps to set it up on your EC2 instance:
+
+```bash
+# SSH into your EC2 instance
 ssh -i <your-key>.pem ubuntu@<your-ec2-public-ip>
+
+# Update package list and install Java
 sudo apt update
 sudo apt install openjdk-17-jre
-java -version  # Verify Java installation
+
+# Verify Java installation
+java -version
+
+# Install necessary dependencies
 sudo apt-get install -y ca-certificates curl gnupg
+
+# Add Jenkins repository key and source list
 curl -fsSL https://pkg.jenkins.io/debian/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+# Update package list again and install Jenkins
 sudo apt-get update
 sudo apt-get install jenkins
+
+# Enable Jenkins to start on boot
 sudo systemctl enable jenkins
+
+# Start Jenkins service
 sudo systemctl start jenkins
-sudo systemctl status jenkins  # Check if Jenkins is running
-Access Jenkins Web Interface: Jenkins runs on port 8080. In your web browser, navigate to:
+
+# Check if Jenkins is running
+sudo systemctl status jenkins
+
 
 http://<your-ec2-public-ip>:8080
 
@@ -189,18 +198,13 @@ Make sure port 8080 is open in your EC2 security group settings.
 Initial Jenkins Setup:
 
 Retrieve the Admin Password by running:
-
-bash
-Copy
-Edit
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 Login to Jenkins using the retrieved password.
-
 Install Suggested Plugins.
 
 Create an Admin User.
 
-Step 7: Create Jenkins Pipeline Project
+###Step 7: Create Jenkins Pipeline Project
 Create a New Item in Jenkins:
 
 Click on New Item on the left sidebar.
