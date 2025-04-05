@@ -58,7 +58,7 @@ gunicorn
 ### Step 4: Dockerize the Django Application
 To containerize the Django application, we will use Docker. Follow these steps to create the necessary configuration files and test the container locally.
 
-1**Create a Dockerfile**: In your repository's root folder, create a file named Dockerfile with the following content:
+1. Create a Dockerfile : In your repository's root folder, create a file named Dockerfile with the following content:
 
 ```groovy
 # Use an official Python runtime as a parent image
