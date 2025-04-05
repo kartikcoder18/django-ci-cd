@@ -49,9 +49,9 @@ python manage.py startapp notes
 ### Step 3: Create requirements.txt
 
 1. Generate a `requirements.txt` file to list necessary dependencies:
-
+```
 pip freeze > requirements.txt
-
+```
 2. Ensure it includes at least the following dependencies:
 
 ```
