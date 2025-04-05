@@ -1,3 +1,7 @@
+# Django CI/CD with Jenkins and Docker
+
+This project demonstrates a CI/CD pipeline using Jenkins for a Django application with Docker containerization.
+
 ## 💡 Introduction
 
 This project aims to automate the deployment of a Django application using Docker and Jenkins. We will build a CI/CD pipeline to ensure continuous integration and deployment with the following technologies:
