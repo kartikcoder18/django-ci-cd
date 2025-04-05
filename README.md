@@ -55,7 +55,81 @@ pip freeze > requirements.txt
 Django>=4.2
 gunicorn
 
-### Step 4: Implementation of EC2 
+### Step 4: Dockerize the Django Application
+To containerize the Django application, we will use Docker. Follow these steps to create the necessary configuration files and test the container locally.
+
+**Create a Dockerfile**: In your repository's root folder, create a file named Dockerfile with the following content:
+
+```groovy
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the current directory contents into the container
+COPY . /app/
+
+# Expose the port the app runs on
+EXPOSE 8000
+
+# Define environment variable
+ENV NAME World
+
+# Run Django server on container start
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+```
+2. Create a docker-compose.yml File
+In the root directory of your repository, create a docker-compose.yml file to simplify Docker container management. Add the following content:
+
+```groovy
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=1
+```
+
+Builds the Docker image using the Dockerfile.
+
+Maps port 8000 on the host machine to port 8000 on the container.
+
+Mounts the current directory (.) as a volume to allow live code updates.
+
+3. Build and Test the Docker Container Locally
+Once the Dockerfile and docker-compose.yml files are created, run the following command to build and start the container:
+
+bash
+Copy
+Edit
+docker-compose up --build
+This command will:
+
+Build the Docker image based on the Dockerfile.
+
+Start the application inside the container on port 8000.
+
+4. Access the Application
+After the build completes successfully, open your browser and visit:
+
+arduino
+Copy
+Edit
+http://localhost:8000
+You should see your Django application running inside the Docker container.
+
+
+### Step 5: Implementation of EC2 
 1. Create an AWS EC2 Instance
 
 To host the Jenkins server, we first need to create an EC2 instance on AWS.
@@ -184,7 +258,7 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
 ---
 
-### Step 5: Initial Jenkins Setup
+### Step 6: Initial Jenkins Setup
 
 1. **Get Admin Password**:
    - To log in to Jenkins for the first time, you will need the initial admin password. Run the following command to retrieve it:
@@ -204,7 +278,7 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
 ---
 
-### Step 6: Create a New Jenkins Pipeline Project
+### Step 7: Create a New Jenkins Pipeline Project
 
 1. **Create a New Item**:
    - Click on **New Item** in Jenkins.
@@ -267,7 +341,7 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
  
 
-### Step 7: Install Docker and Docker Compose
+### Step 8: Install Docker and Docker Compose
 
 1. **Install Docker**:
    - Run the following command to install Docker:
@@ -312,7 +386,7 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
 ---
 
-### Step 8: Deploy the Application
+### Step 9: Deploy the Application
 
 1. **Trigger a Build**:
    - Go back to your Jenkins pipeline project and click **Build Now** to start the pipeline.
