@@ -54,8 +54,10 @@ pip freeze > requirements.txt
 
 2. Ensure it includes at least the following dependencies:
 
+```
 Django>=4.2
 gunicorn
+```
 ---
 ### Step 4: Dockerize the Django Application
 To containerize the Django application, we will use Docker. Follow these steps to create the necessary configuration files and test the container locally.
