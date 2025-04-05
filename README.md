@@ -55,7 +55,8 @@ pip freeze > requirements.txt
 Django>=4.2
 gunicorn
 
-### 1. Create an AWS EC2 Instance
+### Step 4: Implementation of EC2 
+1. Create an AWS EC2 Instance
 
 To host the Jenkins server, we first need to create an EC2 instance on AWS.
 
@@ -183,7 +184,7 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
 ---
 
-### 5. Initial Jenkins Setup
+### Step 5: Initial Jenkins Setup
 
 1. **Get Admin Password**:
    - To log in to Jenkins for the first time, you will need the initial admin password. Run the following command to retrieve it:
@@ -203,7 +204,7 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
 ---
 
-### 6. Create a New Jenkins Pipeline Project
+### Step 6: Create a New Jenkins Pipeline Project
 
 1. **Create a New Item**:
    - Click on **New Item** in Jenkins.
@@ -264,18 +265,9 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
 ---
 
-### 7. Configure Docker Hub
+ 
 
-1. **Create Docker Hub Account**:
-   - If you don't already have a Docker Hub account, create one at [Docker Hub](https://hub.docker.com/).
-
-2. **Add Credentials in Jenkins**:
-   - In Jenkins, go to **Manage Jenkins** -> **Manage Credentials** -> **System** -> **Global credentials (unrestricted)** -> **Add Credentials**.
-   - Select **Username with Password** and enter your Docker Hub credentials. Provide an ID name (e.g., `dockerHub`) to identify these credentials.
-
----
-
-### 8. Install Docker and Docker Compose
+### Step 7: Install Docker and Docker Compose
 
 1. **Install Docker**:
    - Run the following command to install Docker:
@@ -320,7 +312,7 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
 ---
 
-### 9. Deploy the Application
+### Step 8: Deploy the Application
 
 1. **Trigger a Build**:
    - Go back to your Jenkins pipeline project and click **Build Now** to start the pipeline.
