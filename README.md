@@ -293,44 +293,32 @@ Now that Java is installed, you can proceed to install Jenkins, which will be us
 
    ```groovy
    pipeline {
-       agent any
-       stages {
-           stage("Clone The code...") {
-               steps {
-                   echo "Cloning the code"
-                   git url: "<Your_github_project_repo_url>", branch: "main"
-               }
-           }
-           stage("Build and Test...") {
-               steps {
-                   echo "Building the Docker image(Container)"
-                   sh "docker build . -t cicd-note-app:latest"
-               }
-           }
-           stage("Push build to Docker Hub") {
-               steps {
-                   echo "Pushing build to DockerHub..."
-                   withCredentials([
-                       usernamePassword(
-                           credentialsId: "dockerHub",
-                           passwordVariable: "dockerHubPass",
-                           usernameVariable: "dockerHubUser"
-                       )    
-                   ]) {
-                       sh "docker tag cicd-note-app ${env.dockerHubUser}/cicd-note-app:latest"
-                       sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                       sh "docker push ${env.dockerHubUser}/cicd-note-app:latest"
-                   }
-               }
-           }
-           stage("Deploy the Container") {
-               steps {
-                   echo "Deploying docker Container..."
-                   sh "docker compose down && docker compose up -d"
-               }
-           }
-       }
-   }
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/kartikcoder18/django-ci-cd'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t django-notes-app .'
+                }
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                script {
+                    sh 'docker run -d -p 8000:8000 django-notes-app'
+                }
+            }
+        }
+    }
+}
    ```
 
 5. **Save the Jenkins Project**:
