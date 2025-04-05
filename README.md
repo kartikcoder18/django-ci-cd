@@ -35,13 +35,13 @@ cd django-ci-cd
 ### Step 2: Create Django Project Locally
 
 1. Create a new Django project:
-
+```
 django-admin startproject mynotes .
-
+```
 2. Create a new Django app named "notes":
-
+```
 python manage.py startapp notes
-
+```
 3. This will create the basic structure of your Django project and app inside your repository.
 
 ---
