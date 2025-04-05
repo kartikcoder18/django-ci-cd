@@ -100,6 +100,8 @@ services:
       - DEBUG=1
 ```
 
+This configuration:
+
 Builds the Docker image using the Dockerfile.
 
 Maps port 8000 on the host machine to port 8000 on the container.
@@ -109,10 +111,9 @@ Mounts the current directory (.) as a volume to allow live code updates.
 3. Build and Test the Docker Container Locally
 Once the Dockerfile and docker-compose.yml files are created, run the following command to build and start the container:
 
-bash
-Copy
-Edit
+```groovy
 docker-compose up --build
+```
 This command will:
 
 Build the Docker image based on the Dockerfile.
@@ -121,11 +122,9 @@ Start the application inside the container on port 8000.
 
 4. Access the Application
 After the build completes successfully, open your browser and visit:
-
-arduino
-Copy
-Edit
+```groovy
 http://localhost:8000
+```
 You should see your Django application running inside the Docker container.
 
 
