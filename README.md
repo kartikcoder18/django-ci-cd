@@ -44,7 +44,7 @@ Before starting, make sure you have the following installed and configured:
 1. Go to [GitHub](https://github.com/), log in, and create a new repository named `django-ci-cd`.
 2. Clone the repository to your local machine:
 
-```bash
+
 git clone https://github.com/kartikcoder18/django-ci-cd.git
 cd django-ci-cd
 Step 2: Create Django Project Locally
@@ -120,9 +120,7 @@ http://localhost:8000
 Step 5: Add Jenkinsfile and Dockerfile to GitHub
 Create a Jenkinsfile for the CI/CD pipeline:
 
-groovy
-Copy
-Edit
+
 pipeline {
     agent any
 
@@ -160,9 +158,7 @@ pipeline {
 }
 Push the changes to GitHub:
 
-bash
-Copy
-Edit
+
 git add .
 git commit -m "Add Django project, Jenkinsfile, Dockerfile"
 git push -u origin main  # or 'master' depending on your default branch
@@ -247,7 +243,7 @@ Once the build is complete and Jenkins has deployed your application, you can ac
 
 http://<your-ec2-public-ip>:8000
 
-🎯 Conclusion
+##🎯 Conclusion
 This project successfully:
 
 Automates the deployment of Django applications using Docker and Jenkins.
